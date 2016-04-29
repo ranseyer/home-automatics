@@ -1,0 +1,236 @@
+   1               		.file	"CUL.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__tmp_reg__ = 0
+   6               	__zero_reg__ = 1
+   7               		.section	.text.startup.main,"ax",@progbits
+   8               	.global	main
+  10               	main:
+  11               	/* prologue: function */
+  12               	/* frame size = 0 */
+  13               	/* stack size = 0 */
+  14               	.L__stack_usage = 0
+  15 0000 2FE0      		ldi r18,lo8(15)
+  16 0002 88E1      		ldi r24,lo8(24)
+  17 0004 90E0      		ldi r25,0
+  18               	/* #APP */
+  19               	 ;  154 "CUL.c" 1
+  20 0006 0FB6      		in __tmp_reg__,__SREG__
+  21 0008 F894      		cli
+  22 000a A895      		wdr
+  23 000c 8093 6000 		sts 96,r24
+  24 0010 0FBE      		out __SREG__,__tmp_reg__
+  25 0012 2093 6000 		sts 96,r18
+  26               		
+  27               	 ;  0 "" 2
+  28               	/* #NOAPP */
+  29 0016 91E0      		ldi r25,lo8(1)
+  30 0018 80E8      		ldi r24,lo8(-128)
+  31               	/* #APP */
+  32               	 ;  1495 "/usr/lib/avr/include/avr/power.h" 1
+  33 001a 0FB6      		in __tmp_reg__,__SREG__
+  34 001c F894      		cli
+  35 001e 8093 6100 		sts 97, r24
+  36 0022 9093 6100 		sts 97, r25
+  37 0026 0FBE      		out __SREG__, __tmp_reg__
+  38               	 ;  0 "" 2
+  39               	/* #NOAPP */
+  40 0028 2E9A      		sbi 0x5,6
+  41 002a 2D9A      		sbi 0x5,5
+  42 002c 04B6      		in __tmp_reg__,0x34
+  43 002e 03FE      		sbrs __tmp_reg__,3
+  44 0030 00C0      		rjmp .L3
+  45 0032 83E3      		ldi r24,lo8(51)
+  46 0034 90E0      		ldi r25,0
+  47 0036 0E94 0000 		call erb
+  48 003a 8823      		tst r24
+  49 003c 01F0      		breq .L3
+  50 003e 60E0      		ldi r22,0
+  51 0040 83E3      		ldi r24,lo8(51)
+  52 0042 90E0      		ldi r25,0
+  53 0044 0E94 0000 		call ewb
+  54               	/* #APP */
+  55               	 ;  139 "CUL.c" 1
+  56 0048 F894      		cli
+  57               	 ;  0 "" 2
+  58               	/* #NOAPP */
+  59 004a 81E0      		ldi r24,lo8(1)
+  60 004c 85BF      		out 0x35,r24
+  61 004e 82E0      		ldi r24,lo8(2)
+  62 0050 85BF      		out 0x35,r24
+  63 0052 E0E0      		ldi r30,0
+  64 0054 F8E3      		ldi r31,lo8(56)
+  65 0056 0995      		icall
+  66               	.L3:
+  67 0058 89EF      		ldi r24,lo8(-7)
+  68 005a 87BD      		out 0x27,r24
+  69 005c 84E0      		ldi r24,lo8(4)
+  70 005e 85BD      		out 0x25,r24
+  71 0060 82E0      		ldi r24,lo8(2)
+  72 0062 84BD      		out 0x24,r24
+  73 0064 8093 6E00 		sts 110,r24
+  74 0068 1092 8000 		sts 128,__zero_reg__
+  75 006c 8AE0      		ldi r24,lo8(10)
+  76 006e 8093 8100 		sts 129,r24
+  77 0072 84B7      		in r24,0x34
+  78 0074 877F      		andi r24,lo8(-9)
+  79 0076 84BF      		out 0x34,r24
+  80 0078 559A      		sbi 0xa,5
+  81 007a 0E94 0000 		call spi_init
+  82 007e 0E94 0000 		call eeprom_init
+  83 0082 0E94 0000 		call USB_Init
+  84 0086 0E94 0000 		call fht_init
+  85 008a 0E94 0000 		call tx_init
+  86 008e 80E0      		ldi r24,lo8(gs(analyze_ttydata))
+  87 0090 90E0      		ldi r25,hi8(gs(analyze_ttydata))
+  88 0092 9093 0000 		sts input_handle_func+1,r25
+  89 0096 8093 0000 		sts input_handle_func,r24
+  90 009a 0E94 0000 		call rf_router_init
+  91 009e 89E0      		ldi r24,lo8(9)
+  92 00a0 8093 0000 		sts display_channel,r24
+  93 00a4 0E94 0000 		call checkFrequency
+  94 00a8 5D9A      		sbi 0xb,5
+  95               	.L5:
+  96 00aa 0E94 0000 		call USB_USBTask
+  97 00ae 0E94 0000 		call CDC_Task
+  98 00b2 0E94 0000 		call RfAnalyze_Task
+  99 00b6 0E94 0000 		call Minute_Task
+ 100 00ba 0E94 0000 		call FastRF_Task
+ 101 00be 0E94 0000 		call rf_router_task
+ 102 00c2 0E94 0000 		call rf_asksin_task
+ 103 00c6 0E94 0000 		call rf_moritz_task
+ 104 00ca 0E94 0000 		call rf_rwe_task
+ 105 00ce 0E94 0000 		call native_task
+ 106 00d2 0E94 0000 		call kopp_fc_task
+ 107 00d6 0E94 0000 		call rf_mbus_task
+ 108 00da 00C0      		rjmp .L5
+ 110               	.global	fntab
+ 111               		.section	.progmem.data,"a",@progbits
+ 114               	fntab:
+ 115 0000 42        		.byte	66
+ 116 0001 0000      		.word	gs(prepare_boot)
+ 117 0003 62        		.byte	98
+ 118 0004 0000      		.word	gs(rf_mbus_func)
+ 119 0006 43        		.byte	67
+ 120 0007 0000      		.word	gs(ccreg)
+ 121 0009 46        		.byte	70
+ 122 000a 0000      		.word	gs(fs20send)
+ 123 000c 69        		.byte	105
+ 124 000d 0000      		.word	gs(it_func)
+ 125 000f 41        		.byte	65
+ 126 0010 0000      		.word	gs(asksin_func)
+ 127 0012 5A        		.byte	90
+ 128 0013 0000      		.word	gs(moritz_func)
+ 129 0015 4E        		.byte	78
+ 130 0016 0000      		.word	gs(native_func)
+ 131 0018 45        		.byte	69
+ 132 0019 0000      		.word	gs(rwe_func)
+ 133 001b 6B        		.byte	107
+ 134 001c 0000      		.word	gs(kopp_fc_func)
+ 135 001e 47        		.byte	71
+ 136 001f 0000      		.word	gs(rawsend)
+ 137 0021 4D        		.byte	77
+ 138 0022 0000      		.word	gs(em_send)
+ 139 0024 4B        		.byte	75
+ 140 0025 0000      		.word	gs(ks_send)
+ 141 0027 55        		.byte	85
+ 142 0028 0000      		.word	gs(ur_send)
+ 143 002a 59        		.byte	89
+ 144 002b 0000      		.word	gs(somfy_rts_func)
+ 145 002d 52        		.byte	82
+ 146 002e 0000      		.word	gs(read_eeprom)
+ 147 0030 54        		.byte	84
+ 148 0031 0000      		.word	gs(fhtsend)
+ 149 0033 56        		.byte	86
+ 150 0034 0000      		.word	gs(version)
+ 151 0036 57        		.byte	87
+ 152 0037 0000      		.word	gs(write_eeprom)
+ 153 0039 58        		.byte	88
+ 154 003a 0000      		.word	gs(set_txreport)
+ 155 003c 65        		.byte	101
+ 156 003d 0000      		.word	gs(eeprom_factory_reset)
+ 157 003f 66        		.byte	102
+ 158 0040 0000      		.word	gs(fastrf_func)
+ 159 0042 6D        		.byte	109
+ 160 0043 0000      		.word	gs(getfreemem)
+ 161 0045 6C        		.byte	108
+ 162 0046 0000      		.word	gs(ledfunc)
+ 163 0048 74        		.byte	116
+ 164 0049 0000      		.word	gs(gettime)
+ 165 004b 75        		.byte	117
+ 166 004c 0000      		.word	gs(rf_router_func)
+ 167 004e 78        		.byte	120
+ 168 004f 0000      		.word	gs(ccsetpa)
+ 169 0051 00        		.byte	0
+ 170 0052 0000      		.word	0
+ 171               		.comm	output_flush_func,2,1
+ 172               		.comm	input_handle_func,2,1
+ 173               		.comm	packetCheckValues,1,1
+ 174               		.ident	"GCC: (GNU) 4.8.2"
+ 175               	.global __do_clear_bss
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 CUL.c
+     /tmp/ccq5jHdo.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccq5jHdo.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccq5jHdo.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccq5jHdo.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccq5jHdo.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccq5jHdo.s:10     .text.startup.main:0000000000000000 main
+                            *COM*:0000000000000002 input_handle_func
+     /tmp/ccq5jHdo.s:114    .progmem.data:0000000000000000 fntab
+                            *COM*:0000000000000002 output_flush_func
+                            *COM*:0000000000000001 packetCheckValues
+
+UNDEFINED SYMBOLS
+erb
+ewb
+spi_init
+eeprom_init
+USB_Init
+fht_init
+tx_init
+analyze_ttydata
+rf_router_init
+display_channel
+checkFrequency
+USB_USBTask
+CDC_Task
+RfAnalyze_Task
+Minute_Task
+FastRF_Task
+rf_router_task
+rf_asksin_task
+rf_moritz_task
+rf_rwe_task
+native_task
+kopp_fc_task
+rf_mbus_task
+prepare_boot
+rf_mbus_func
+ccreg
+fs20send
+it_func
+asksin_func
+moritz_func
+native_func
+rwe_func
+kopp_fc_func
+rawsend
+em_send
+ks_send
+ur_send
+somfy_rts_func
+read_eeprom
+fhtsend
+version
+write_eeprom
+set_txreport
+eeprom_factory_reset
+fastrf_func
+getfreemem
+ledfunc
+gettime
+rf_router_func
+ccsetpa
+__do_clear_bss
