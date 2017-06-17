@@ -4084,11 +4084,6 @@ DIN A3, landscape with extra doc field</description>
 <sheets>
 <sheet>
 <plain>
-<text x="317.5" y="200.66" size="1.016" layer="97">10*15Ohm in Reihe = 150Ohm ergibt 1W an 12V (mit 6,8Ohm ergeben sich 2W)
-
-
-2*1,5K Parall an 12V ergibt 0,2W (750R/2 ergibt 0,4W)
-</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -4244,10 +4239,4 @@ DIN A3, landscape with extra doc field</description>
 </sheets>
 </schematic>
 </drawing>
-<compatibility>
-<note version="6.3" minversion="6.2.2" severity="warning">
-Since Version 6.2.2 text objects can contain more than one line,
-which will not be processed correctly with this version.
-</note>
-</compatibility>
 </eagle>
