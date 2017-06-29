@@ -17554,7 +17554,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="C31" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
 <part name="GND18" library="supply1" deviceset="GND" device=""/>
-<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="4K7"/>
+<part name="R34" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="PORT14" library="frames" deviceset="PORT5" device=""/>
 <part name="LED32" library="led" deviceset="LED" device="CHIPLED_0805"/>
 <part name="R32" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
@@ -17589,7 +17589,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="C2" library="rcl" deviceset="C-EU" device="C1206" value="20p"/>
 <part name="C8" library="rcl" deviceset="C-EU" device="C1206" value="5p"/>
 <part name="L1" library="EAGLE-EMC_COMPONENTS-rev17a" deviceset="WE-LQ" device="_1210" value="1mH"/>
-<part name="D2" library="diode" deviceset="DIODE-" device="MELF-MLL41" value="1N4848"/>
+<part name="D2" library="diode" deviceset="DIODE-" device="MELF-MLL41"/>
 <part name="IC1" library="linear" deviceset="LM339" device="D"/>
 <part name="KAMMS" library="wirepad" deviceset="WIREPAD" device="SMD5-1,8"/>
 <part name="KAMM-" library="wirepad" deviceset="WIREPAD" device="SMD5-1,8"/>

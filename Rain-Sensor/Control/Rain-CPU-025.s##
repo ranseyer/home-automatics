@@ -17698,7 +17698,7 @@ siehe 1Wire...</text>
 <instance part="C2" gate="G$1" x="180.34" y="215.9" rot="R180"/>
 <instance part="C8" gate="G$1" x="170.18" y="256.54" rot="R270"/>
 <instance part="L1" gate="G$1" x="144.78" y="224.79" rot="R270"/>
-<instance part="D2" gate="G$1" x="134.62" y="256.54" rot="R180"/>
+<instance part="D2" gate="G$1" x="139.7" y="299.72" rot="R180"/>
 <instance part="IC1" gate="A" x="76.2" y="200.66" rot="R180"/>
 <instance part="IC1" gate="B" x="151.13" y="180.34" rot="R180"/>
 <instance part="IC1" gate="C" x="101.6" y="254" rot="R180"/>
@@ -18180,7 +18180,7 @@ siehe 1Wire...</text>
 <junction x="120.65" y="256.54"/>
 <pinref part="C7" gate="G$1" pin="1"/>
 <pinref part="D2" gate="G$1" pin="C"/>
-<wire x1="132.08" y1="256.54" x2="127" y2="256.54" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="299.72" x2="127" y2="256.54" width="0.1524" layer="91"/>
 <junction x="127" y="256.54"/>
 <pinref part="IC1" gate="C" pin="-IN"/>
 </segment>
@@ -18193,7 +18193,7 @@ siehe 1Wire...</text>
 <pinref part="L1" gate="G$1" pin="1"/>
 <wire x1="144.78" y1="232.41" x2="144.78" y2="234.95" width="0.1778" layer="91"/>
 <pinref part="D2" gate="G$1" pin="A"/>
-<wire x1="137.16" y1="256.54" x2="144.78" y2="256.54" width="0.1778" layer="91"/>
+<wire x1="142.24" y1="299.72" x2="144.78" y2="256.54" width="0.1778" layer="91"/>
 <junction x="144.78" y="256.54"/>
 <pinref part="KAMMS" gate="G$1" pin="P"/>
 <wire x1="158.75" y1="234.95" x2="144.78" y2="234.95" width="0.1778" layer="91"/>
