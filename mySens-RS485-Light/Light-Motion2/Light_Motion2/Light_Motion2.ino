@@ -37,7 +37,7 @@
 #define MY_RS485_DE_PIN 2
 // Set RS485 baud rate to use
 #define MY_RS485_BAUD_RATE 9600
-#define MY_NODE_ID 118
+#define MY_NODE_ID 102
 
 #include <SPI.h>
 #include <MySensors.h>  
