@@ -14,11 +14,11 @@ Connectors for
 3) Grove Connectors but in 2,54mm raster 
 4) Connector for screws or clamping 
 5) more Sensors (I2C or Digital pin with Interupt) 
-
+6) ATSHA204 (SMD solder)
  
 Power via 
 1) Step-Up 
-2) Down 
+2) Step-Down ("mini360")
 3) Linear-Regulator 
 
 
@@ -31,6 +31,12 @@ Many options with many drills
 
 Status 
 Alpha, not tested. 
+
+
+
+Important Hint:
+
+Most Parts are optional. Use only what you need!
 
  
 Changes / Known Bugs: 

@@ -1,0 +1,62 @@
+Partlist
+
+Exported from easyMySens-v024.sch at 29.08.17 13:03
+
+EAGLE Version 7.3.0 Copyright (c) 1988-2015 CadSoft
+
+Assembly variant: 
+
+Part     Value                    Device                   Package                Library                    Sheet
+
+A0       DIP Grove                MA04-1                   MA04-1                 con-lstb                   1
+A4                                PINHD-1X1                1X01                   pinhead                    1
+ANT                               PINHD-1X1                1X01                   pinhead                    1
+ANT1                              PINHD-1X1                1X01                   pinhead                    1
+BH1750                            PINHD-1X04_2.54-S        1X04-S                 pinhead-2                  1
+BOOST    R-78C1.8-1.0             R-78C1.8-1.0             SIP3                   dc-dc-converter            1
+C1       10uF                     C-EUC1210                C1210                  rcl                        1
+C2       0.1uF                    C-EUC1206                C1206                  rcl                        1
+C3       10uF                     CPOL-EUSMCC              SMC_C                  rcl                        1
+C4       0,1uF                    C-EUC1206                C1206                  rcl                        1
+C6       22pF                     C-EUC0805                C0805                  rcl                        1
+C10      22p                      C-EUC0805                C0805                  rcl                        1
+C15      10uF                     CAP-0603                 C0603                  Discrete-new               1
+C16      100nF                    CAP-0603                 C0603                  Discrete-new               1
+C27      10uF                     CAP-0603                 C0603                  Discrete-new               1
+C28      100nF                    CAP-0603                 C0603                  Discrete-new               1
+C29      10uF                     CAP-0603                 C0603                  Discrete-new               1
+C30      100nF                    CAP-0603                 C0603                  Discrete-new               1
+CC0      CC1101                   CC1101_MODULE1SMD        CC1101_MODULE1_SMD     wireless                   1
+D7       DIP Grove                MA04-1                   MA04-1                 con-lstb                   1
+F1       1812L                    1812L                    1812L                  ptc-littlefuse             1
+HM1                               CONN_04                  1X04                   SparkFun-Connectors        1
+HM2                               CONN_06SILK_FEMALE_PTH   1X06                   SparkFun-Connectors        1
+HM3                               CONN_04                  1X04                   SparkFun-Connectors        1
+I2C-1                             PINHD-1X04_2.54-S        1X04-S                 pinhead-2                  1
+I2C-2                             PINHD-1X04_2.54-S        1X04-S                 pinhead-2                  1
+I2C.     DIP Grove                MA04-1                   MA04-1                 con-lstb                   1
+IC1      ATSHA204A                ATSHA204A                SOT23                  Sensor                     1
+IC2      REG1117                  REG1117                  SOT223                 burr-brown                 1
+JP1                               PINHD-1X04_2.54-S        1X04-S                 pinhead-2                  1
+JP3                               PINHD-1X04_2.54-S        1X04-S                 pinhead-2                  1
+M1       ARDUINO-PRO-MINI-3.3V#NP ARDUINO-PRO-MINI-3.3V#NP ARDUINO-PRO-MINI#NP    diy-modules                1
+M2       NRF24L01+SMD             NRF24L01+SMD             NRF24L01+SMD           wireless                   1
+MOTION                            PINHD-1X04_2.54-S        1X04-S                 pinhead-2                  1
+NMODULE  CONNECTOR_10DUPONT       CONNECTOR_10DUPONT       DUPONT_10              TD-MySensors               1
+OPT                               CONN_04                  1X04                   SparkFun-Connectors        1
+R1       1M                       R-EU_R0805               R0805                  rcl                        1
+R2       470K                     R-EU_R0805               R0805                  rcl                        1
+R4       150R                     R-EU_R0805               R0805                  rcl                        1
+R5       330R                     R-EU_R0805               R0805                  rcl                        1
+R6       330R                     R-EU_R0805               R0805                  rcl                        1
+RAW                               SJ                       SJ                     jumper                     1
+REG1     LP2950Z                  LP2950Z                  TO92                   linear                     1
+REG2     STEP-DWN-MP2307          DC-DC-STEP-DOWN-MP2307   DC-DC-STEP-DOWN-MP2307 diy-modules                1
+RFM69W   RFM69HW                  RFM69HW                  RFM                    hoperf                     1
+RS485    MAX487ECSA+              MAX487ECSA+              SOIC127P600X175-8N     Maxim_By_element14_Batch_1 1
+U$3      2.1MMJACKTHM             2.1MMJACKTHM             PJ-102A                adafruit                   1
+UART     DIP Grove                MA04-1                   MA04-1                 con-lstb                   1
+X1       1751280                  1751280                  1751280                con-phoenix-350            1
+X2                                SMACONNECTOR_EDGE        SMA_EDGELAUNCH         adafruit                   1
+X3       1751280                  1751280                  1751280                con-phoenix-350            1
+X5                                SMACONNECTOR_EDGE        SMA_EDGELAUNCH         adafruit                   1
