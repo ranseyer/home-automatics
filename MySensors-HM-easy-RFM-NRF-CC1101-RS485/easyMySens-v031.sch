@@ -19420,21 +19420,6 @@ SHA Chip!</text>
 <junction x="-50.8" y="162.56"/>
 </segment>
 <segment>
-<pinref part="BH1750" gate="A" pin="3"/>
-<wire x1="116.84" y1="-40.64" x2="116.84" y2="-54.61" width="0.1524" layer="91"/>
-<label x="116.84" y="-54.61" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<pinref part="I2C-1" gate="A" pin="3"/>
-<wire x1="96.52" y1="-40.64" x2="96.52" y2="-54.61" width="0.1524" layer="91"/>
-<label x="96.52" y="-54.61" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<pinref part="I2C-2" gate="A" pin="3"/>
-<wire x1="91.44" y1="-12.7" x2="91.44" y2="-26.67" width="0.1524" layer="91"/>
-<label x="91.44" y="-26.67" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
 <pinref part="HM2" gate="G$1" pin="3"/>
 <wire x1="53.34" y1="48.26" x2="66.04" y2="48.26" width="0.1524" layer="91"/>
 <label x="53.34" y="48.26" size="1.778" layer="95"/>
@@ -19448,6 +19433,21 @@ SHA Chip!</text>
 <pinref part="I2C." gate="1" pin="2"/>
 <wire x1="-6.35" y1="-43.18" x2="-2.54" y2="-43.18" width="0.1524" layer="91"/>
 <label x="-6.35" y="-43.18" size="1.27" layer="95" ratio="10"/>
+</segment>
+<segment>
+<pinref part="I2C-1" gate="A" pin="4"/>
+<wire x1="99.06" y1="-40.64" x2="99.06" y2="-48.26" width="0.1524" layer="91"/>
+<label x="99.06" y="-48.26" size="1.778" layer="95" rot="R270" xref="yes"/>
+</segment>
+<segment>
+<pinref part="BH1750" gate="A" pin="4"/>
+<wire x1="119.38" y1="-40.64" x2="119.38" y2="-48.26" width="0.1524" layer="91"/>
+<label x="119.38" y="-48.26" size="1.778" layer="95" rot="R270" xref="yes"/>
+</segment>
+<segment>
+<pinref part="I2C-2" gate="A" pin="4"/>
+<wire x1="93.98" y1="-12.7" x2="93.98" y2="-20.32" width="0.1524" layer="91"/>
+<label x="93.98" y="-20.32" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 </net>
 <net name="A5" class="0">
@@ -19464,21 +19464,6 @@ SHA Chip!</text>
 <pinref part="M1" gate="G$1" pin="GND.3"/>
 <wire x1="-43.18" y1="205.74" x2="-55.88" y2="205.74" width="0.1524" layer="91"/>
 <label x="-55.88" y="205.74" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
-<pinref part="BH1750" gate="A" pin="4"/>
-<wire x1="119.38" y1="-40.64" x2="119.38" y2="-48.26" width="0.1524" layer="91"/>
-<label x="119.38" y="-48.26" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<pinref part="I2C-1" gate="A" pin="4"/>
-<wire x1="99.06" y1="-40.64" x2="99.06" y2="-48.26" width="0.1524" layer="91"/>
-<label x="99.06" y="-48.26" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<pinref part="I2C-2" gate="A" pin="4"/>
-<wire x1="93.98" y1="-12.7" x2="93.98" y2="-20.32" width="0.1524" layer="91"/>
-<label x="93.98" y="-20.32" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
 <pinref part="MOTION" gate="A" pin="4"/>
@@ -19499,6 +19484,21 @@ SHA Chip!</text>
 <pinref part="I2C." gate="1" pin="1"/>
 <wire x1="-6.35" y1="-45.72" x2="-2.54" y2="-45.72" width="0.1524" layer="91"/>
 <label x="-6.35" y="-45.72" size="1.27" layer="95" ratio="10"/>
+</segment>
+<segment>
+<pinref part="BH1750" gate="A" pin="3"/>
+<wire x1="116.84" y1="-40.64" x2="116.84" y2="-54.61" width="0.1524" layer="91"/>
+<label x="116.84" y="-54.61" size="1.778" layer="95" rot="R270" xref="yes"/>
+</segment>
+<segment>
+<pinref part="I2C-1" gate="A" pin="3"/>
+<wire x1="96.52" y1="-40.64" x2="96.52" y2="-54.61" width="0.1524" layer="91"/>
+<label x="96.52" y="-54.61" size="1.778" layer="95" rot="R270" xref="yes"/>
+</segment>
+<segment>
+<pinref part="I2C-2" gate="A" pin="3"/>
+<wire x1="91.44" y1="-12.7" x2="91.44" y2="-26.67" width="0.1524" layer="91"/>
+<label x="91.44" y="-26.67" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 </net>
 <net name="D5" class="0">
