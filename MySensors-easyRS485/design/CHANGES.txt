@@ -1,5 +1,0 @@
-Modifications made by Licensee (see section 3.4.b in )
-Rev 001
-PCB with connections for a MySensors node using Arduino Pro Mini (5V or 3.3v), , booster and voltage divider (if battery operated), and input for different sensors.
-
-This is a PCB that only contains the basic functions for MySensors but is somewhat dynamic. The main goal was to eliminate the build time soldering wires between the Arduino Pro Mini and the Radio. Its a PCB for all newbies that wants to do basic nodes like myself out there... :)
