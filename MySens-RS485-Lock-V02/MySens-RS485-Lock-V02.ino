@@ -177,7 +177,7 @@ void loop() {
       bool tripped = 1;
       Serial.println(tripped);
       send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
-//      send(msg.ir_receive(tagid);  // Send id of the rfid-tag  to gw
+      send(tagMsg.set(tagid));  // Send id of the rfid-tag  to gw
       //V_IR_RECEIVE  33  This message contains a received IR-command S_IR
 //MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
 //MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
