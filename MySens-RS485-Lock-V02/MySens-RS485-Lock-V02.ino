@@ -46,15 +46,38 @@
 // Enable debug prints to serial monitor
 #define MY_DEBUG 
 
+
+#define MY_NODE_ID 22
 // Enable and select radio type attached
-#define MY_RADIO_NRF24
+//#define MY_RADIO_NRF24
 //#define MY_RADIO_RFM69
+// Enable RS485 transport layer
+#define MY_RS485
+#define MY_TRANSPORT_WAIT_READY_MS 1000
+
+// Define this to enables DE-pin management on defined pin
+#define MY_RS485_DE_PIN 2
+
+// Set RS485 baud rate to use
+#define MY_RS485_BAUD_RATE 38400
+
+// Enable this if RS485 is connected to a hardware serial port
+// Not possible with Arduino Nano !!
+//#define MY_RS485_HWSERIAL Serial
+
+#define RF_INIT_DELAY   125
+
+
+
 
 #include <SPI.h>
 #include <MySensors.h>  
 #include <Wire.h>
 #include <PN532_I2C.h>
 #include <PN532.h>
+
+
+
 
 
 // Add your valid rfid keys here. To find you your key just run sketch; hold your new RFID tag in fron ot the reader; 
