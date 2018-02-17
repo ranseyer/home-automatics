@@ -87,19 +87,23 @@ uint8_t validKeys[][maxKeyLength] = {
                     { 0, 0, 0, 0, 0, 0, 0 },    // ADD YOUR KEYS HERE!
                     { 0, 0, 0, 0, 0, 0, 0 }};
 int keyCount = sizeof validKeys / maxKeyLength; 
+String tagid = String();
+
 
 #define CHILD_ID_LOCK  1   // Id of the sensor child
-#define CHILD_ID_ALARM 2   // Id of the sensor child
-#define CHILD_ID_TAGID 3   // Id of the sensor child
+#define CHILD_ID_WRONG 2   // Id of the sensor child
+#define CHILD_ID_ALARM 3   // Id of the sensor child
+#define CHILD_ID_TAGID 4   // Id of the sensor child
 //#define CHILD_ID 99   // Id of the sensor child
 
 // Pin definition
 const int lockPin = 4;         // (Digital 4) The pin that activates the relay/solenoid lock.
 bool lockStatus;
 MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
-MyMessage  lockArmMsg(CHILD_ID_ALARM, V_ARMED);
+MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
 MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
-
+MyMessage  tagMsg(CHILD_ID_TAGID,  V_IR_RECEIVE);
+//xxx
 
 
 PN532_I2C pn532i2c(Wire);
@@ -131,43 +135,56 @@ void setup() {
 }
 
 void presentation()  {
-  sendSketchInfo("RFID Lock", "0.0.1");
+  sendSketchInfo("RFID Lock", "0.0.2");
   present(CHILD_ID_LOCK, S_LOCK);      delay(RF_INIT_DELAY);
+  present(CHILD_ID_WRONG, S_DOOR);   delay(RF_INIT_DELAY);
   present(CHILD_ID_ALARM, S_MOTION);   delay(RF_INIT_DELAY);
   present(CHILD_ID_TAGID, S_IR);     delay(RF_INIT_DELAY);
-
 }
+
+
+
 
 void loop() {
   bool success;
   uint8_t key[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
   uint8_t currentKeyLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
 
-
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &key[0], &currentKeyLength);
+//  Serial.print(key, BYTE);
+//    Serial.println(uid);
 
 
-
-String s = String();
   
   if (success) {
-    s+=("Found tag id: ");
+    tagid+=("Found tag id: ");
     for (uint8_t i=0; i < currentKeyLength; i++) 
     {
-      if (i>0) s+=(",");
-      s+=("0x");s+=(key[i]); 
+      if (i>0) tagid+=(",");
+      tagid+=("0x");tagid+=(key[i]); 
     }
     for (uint8_t i=currentKeyLength; i < maxKeyLength; i++) 
     {
-      s+=(",0x00"); 
+      tagid+=(",0x00"); 
     }
 
 //    Serial.println("Start");
-    Serial.println(s);
+    Serial.println(tagid);
 //    Serial.println("Ende");
+      bool tripped = 1;
+      Serial.println(tripped);
+      send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
+//      send(msg.ir_receive(tagid);  // Send id of the rfid-tag  to gw
+      //V_IR_RECEIVE  33  This message contains a received IR-command S_IR
+//MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
+//MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
+//MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
+//MyMessage  tagMsg(CHILD_TAGID, V_TRIPPED);
+
+
 
 
 
