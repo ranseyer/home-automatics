@@ -117,17 +117,25 @@ void loop() {
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &key[0], &currentKeyLength);
 
+
+
+String s = String();
+  
   if (success) {
-    Serial.print("Found tag id: ");
+    s+=("Found tag id: ");
     for (uint8_t i=0; i < currentKeyLength; i++) 
     {
-      if (i>0) Serial.print(",");
-      Serial.print("0x");Serial.print(key[i], HEX); 
+      if (i>0) s+=(",");
+      s+=("0x");s+=(key[i]); 
     }
     for (uint8_t i=currentKeyLength; i < maxKeyLength; i++) 
     {
-      Serial.print(",0x00"); 
+      s+=(",0x00"); 
     }
+
+    Serial.println(s);
+
+
 
 
     Serial.println("");
