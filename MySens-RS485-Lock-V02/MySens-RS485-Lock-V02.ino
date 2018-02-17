@@ -45,7 +45,7 @@
 
 // Enable debug prints to serial monitor
 #define MY_DEBUG 
-
+#define MY_TRANSPORT_WAIT_READY_MS 1000
 
 #define MY_NODE_ID 22
 // Enable and select radio type attached
@@ -53,7 +53,7 @@
 //#define MY_RADIO_RFM69
 // Enable RS485 transport layer
 #define MY_RS485
-#define MY_TRANSPORT_WAIT_READY_MS 1000
+
 
 // Define this to enables DE-pin management on defined pin
 #define MY_RS485_DE_PIN 2
@@ -66,7 +66,6 @@
 //#define MY_RS485_HWSERIAL Serial
 
 #define RF_INIT_DELAY   125
-
 
 
 
@@ -89,13 +88,20 @@ uint8_t validKeys[][maxKeyLength] = {
                     { 0, 0, 0, 0, 0, 0, 0 }};
 int keyCount = sizeof validKeys / maxKeyLength; 
 
-
-#define CHILD_ID 99   // Id of the sensor child
+#define CHILD_ID_LOCK  1   // Id of the sensor child
+#define CHILD_ID_ALARM 2   // Id of the sensor child
+#define CHILD_ID_TAGID 3   // Id of the sensor child
+//#define CHILD_ID 99   // Id of the sensor child
 
 // Pin definition
 const int lockPin = 4;         // (Digital 4) The pin that activates the relay/solenoid lock.
 bool lockStatus;
-MyMessage lockMsg(CHILD_ID, V_LOCK_STATUS);
+MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
+MyMessage  lockArmMsg(CHILD_ID_ALARM, V_ARMED);
+MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
+
+
+
 PN532_I2C pn532i2c(Wire);
 PN532 nfc(pn532i2c);
 
@@ -125,8 +131,11 @@ void setup() {
 }
 
 void presentation()  {
-  sendSketchInfo("RFID Lock", "1.0");
-  present(CHILD_ID, S_LOCK);
+  sendSketchInfo("RFID Lock", "0.0.1");
+  present(CHILD_ID_LOCK, S_LOCK);      delay(RF_INIT_DELAY);
+  present(CHILD_ID_ALARM, S_MOTION);   delay(RF_INIT_DELAY);
+  present(CHILD_ID_TAGID, S_IR);     delay(RF_INIT_DELAY);
+
 }
 
 void loop() {
@@ -156,7 +165,9 @@ String s = String();
       s+=(",0x00"); 
     }
 
+//    Serial.println("Start");
     Serial.println(s);
+//    Serial.println("Ende");
 
 
 
