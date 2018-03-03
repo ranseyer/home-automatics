@@ -13,6 +13,13 @@
 
 // Define this to enables DE-pin management on defined pin
 #define MY_RS485_DE_PIN 2
+// Pin definition
+const int lockPin = 4;         // (Digital 4) The pin that activates the relay/solenoid lock.
+
+bool lockStatus;
+String tagid = String();
+
+
 
 // Set RS485 baud rate to use
 #define MY_RS485_BAUD_RATE 38400
@@ -46,13 +53,7 @@ int keyCount = sizeof validKeys / maxKeyLength;
 #define CHILD_ID_WRONG 2   // Id of the sensor child S_DOOR
 #define CHILD_ID_ALARM 3   // Id of the sensor child S_MOTION
 #define CHILD_ID_TAGID 4   // Id of the sensor child S_IR
-//#define CHILD_ID 99   // Id of the sensor child
  
-// Pin definition
-const int lockPin = 4;         // (Digital 4) The pin that activates the relay/solenoid lock.
-
-bool lockStatus;
-String tagid = String();
 
 MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
 MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
@@ -76,10 +77,7 @@ void setup() {
   Serial.print("Found NFC chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX); 
   Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC); 
   Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
-  // Set the max number of retry attempts to read from a card
-  // This prevents us from waiting forever for a card, which is
-  // the default behaviour of the PN532.
-  nfc.setPassiveActivationRetries(0x3);
+  nfc.setPassiveActivationRetries(0x3); //Retries reading from CARD
   
   // configure board to read RFID tags
   nfc.SAMConfig();
@@ -89,7 +87,7 @@ void setup() {
 }
 
 void presentation()  {
-  sendSketchInfo("RFID Lock", "0.0.3");
+  sendSketchInfo("RFID Lock", "0.0.4");
   present(CHILD_ID_LOCK, S_LOCK);      delay(RF_INIT_DELAY);
   present(CHILD_ID_WRONG, S_DOOR);   delay(RF_INIT_DELAY);
   present(CHILD_ID_ALARM, S_MOTION);   delay(RF_INIT_DELAY);
@@ -123,6 +121,7 @@ void loop() {
     Serial.println("");
 
 
+
 tagid=(""); //Start with an empty string!
     for (uint8_t i=0; i < currentKeyLength; i++)
     {
@@ -138,8 +137,27 @@ tagid=(""); //Start with an empty string!
     Serial.println(tagid);
     Serial.println("Ende");
 
+    char buffer[24];
+    sprintf(buffer, "0x%07lX", key);
+    send(tagMsg.set(buffer));
 
+    
+    bool tripped = 1;
+    #ifdef MY_DEBUG_LOCAL
+     Serial.println(tripped);
+    #endif
 
+    send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
+    //send(tagMsg.set(tagid));  // Send id of the rfid-tag  to gw
+    //V_IR_RECEIVE  33  This message contains a received IR-command S_IR
+    //MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
+    //MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
+    //MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
+    //MyMessage  tagMsg(CHILD_TAGID, V_TRIPPED);
+
+#ifdef MY_DEBUG_LOCAL
+    Serial.println("");
+#endif
 
 
     bool valid = false;
