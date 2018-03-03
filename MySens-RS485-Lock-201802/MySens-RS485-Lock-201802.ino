@@ -109,15 +109,12 @@ void loop() {
     Serial.print("Found tag id: ");
     for (uint8_t i=0; i < currentKeyLength; i++) 
     {
-      if (i>0) Serial.print(",");
-      Serial.print("0x");Serial.print(key[i], HEX); 
+      if (i>0) Serial.print(key[i], HEX); 
     }
     for (uint8_t i=currentKeyLength; i < maxKeyLength; i++) 
     {
-      Serial.print(",0x00"); 
+      Serial.print("00"); 
     }
-
-
     Serial.println("");
 
 
