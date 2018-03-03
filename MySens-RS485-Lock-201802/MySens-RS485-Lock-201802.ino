@@ -138,7 +138,7 @@ tagid=(""); //Start with an empty string!
     Serial.println("Ende");
 
     char buffer[24];
-    sprintf(buffer, "0x%07lX", key);
+    sprintf(buffer, "%23lX", key);
     send(tagMsg.set(buffer));
 
     
