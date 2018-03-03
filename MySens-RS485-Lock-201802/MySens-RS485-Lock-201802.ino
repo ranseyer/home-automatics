@@ -1,5 +1,6 @@
 // Enable debug prints to serial monitor
-#define MY_DEBUG 
+#define MY_DEBUG
+#define MY_DEBUG_LOCAL 
 #define MY_TRANSPORT_WAIT_READY_MS 1000
 
 #define MY_NODE_ID 22
@@ -41,12 +42,21 @@ uint8_t validKeys[][maxKeyLength] = {
 int keyCount = sizeof validKeys / maxKeyLength; 
 
 
-#define CHILD_ID 99   // Id of the sensor child
+#define CHILD_ID_LOCK  1   // Id of the sensor child S_LOCK
+#define CHILD_ID_WRONG 2   // Id of the sensor child S_DOOR
+#define CHILD_ID_ALARM 3   // Id of the sensor child S_MOTION
+#define CHILD_ID_TAGID 4   // Id of the sensor child S_IR
+//#define CHILD_ID 99   // Id of the sensor child
  
 // Pin definition
 const int lockPin = 4;         // (Digital 4) The pin that activates the relay/solenoid lock.
 bool lockStatus;
-MyMessage lockMsg(CHILD_ID, V_LOCK_STATUS);
+MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
+MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
+MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
+MyMessage  tagMsg(CHILD_ID_TAGID,  V_IR_RECEIVE);
+
+
 PN532_I2C pn532i2c(Wire);
 PN532 nfc(pn532i2c);
  
@@ -76,8 +86,11 @@ void setup() {
 }
 
 void presentation()  {
-  sendSketchInfo("RFID Lock", "1.0");
-  present(CHILD_ID, S_LOCK);
+  sendSketchInfo("RFID Lock", "0.0.3");
+  present(CHILD_ID_LOCK, S_LOCK);      delay(RF_INIT_DELAY);
+  present(CHILD_ID_WRONG, S_DOOR);   delay(RF_INIT_DELAY);
+  present(CHILD_ID_ALARM, S_MOTION);   delay(RF_INIT_DELAY);
+  present(CHILD_ID_TAGID, S_IR);     delay(RF_INIT_DELAY);
 }
  
 void loop() {
