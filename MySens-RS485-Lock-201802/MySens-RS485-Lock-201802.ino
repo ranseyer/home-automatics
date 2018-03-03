@@ -50,7 +50,10 @@ int keyCount = sizeof validKeys / maxKeyLength;
  
 // Pin definition
 const int lockPin = 4;         // (Digital 4) The pin that activates the relay/solenoid lock.
+
 bool lockStatus;
+String tagid = String();
+
 MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
 MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
 MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
@@ -118,6 +121,26 @@ void loop() {
 
 
     Serial.println("");
+
+
+tagid=(""); //Start with an empty string!
+    for (uint8_t i=0; i < currentKeyLength; i++)
+    {
+      if (i>0) tagid+=(",");
+      tagid+=("0x");tagid+=(key[i]);
+    }
+    for (uint8_t i=currentKeyLength; i < maxKeyLength; i++)
+    {
+      tagid+=(",0x00");
+    }
+
+    Serial.println("Start");
+    Serial.println(tagid);
+    Serial.println("Ende");
+
+
+
+
 
     bool valid = false;
     // Compare this key to the valid once registered here in sketch 
