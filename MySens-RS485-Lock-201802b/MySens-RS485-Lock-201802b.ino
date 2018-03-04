@@ -106,7 +106,8 @@ void loop() {
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &key[0], &currentKeyLength);
   
   if (success) {
-    Serial.print("Found tag id: ");
+
+    Serial.print("Original tag id: ");
     for (uint8_t i=0; i < currentKeyLength; i++) 
     {
       if (i>0) Serial.print(key[i], HEX); 
@@ -118,48 +119,29 @@ void loop() {
     Serial.println("");
 
 
-
-tagid=(""); //Start with an empty string!
+    tagid=(""); //Start with an empty string!
     for (uint8_t i=0; i < currentKeyLength; i++)
     {
-      if (i>0) tagid+=(",");
-      tagid+=("0x");tagid+=(key[i]);
+      tagid+=(String(key[i], HEX));
     }
     for (uint8_t i=currentKeyLength; i < maxKeyLength; i++)
     {
-      tagid+=(",0x00");
+      tagid+=("00");
     }
-
-    Serial.println("Start");
-    Serial.println(tagid);
-    Serial.println("Ende");
-
-//   char buffer[24];
-//   sprintf(buffer, "%23lX", key);
-//   send(tagMsg.set(buffer));
-
-    
-Serial.println("Buffer");
-//sprintf(buffer, "%X", key);
-//sprintf(buffer, "%X%X%X%X%X%X%X", key[0],key[1],key[2],key[3],key[4],key[5],key[6]);
-//char buffer[currentKeyLength*2];
-char buffer[currentKeyLength*2+3];
-//sprintf(buffer, "%hhX", key);
-sprintf(buffer, "%X%X", key[0], key);
-Serial.print(buffer);
-    
+   
     bool tripped = 1;
     #ifdef MY_DEBUG_LOCAL
      Serial.println(tripped);
     #endif
 
     send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
-    //send(tagMsg.set(tagid));  // Send id of the rfid-tag  to gw
-    //V_IR_RECEIVE  33  This message contains a received IR-command S_IR
-    //MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
-    //MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
-    //MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
-    //MyMessage  tagMsg(CHILD_TAGID, V_TRIPPED);
+
+    char buffer[24];
+    sprintf(buffer, "%23lX", key);
+    send(tagMsg.set(buffer));  // Send id of the rfid-tag  to gw
+    
+    Serial.print("New tag id: "); Serial.print(tagid); Serial.println("");
+
 
 #ifdef MY_DEBUG_LOCAL
     Serial.println("");
