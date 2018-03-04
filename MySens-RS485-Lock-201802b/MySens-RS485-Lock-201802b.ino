@@ -138,7 +138,7 @@ void loop() {
 
     char buffer[24];
     sprintf(buffer, "%23lX", key);
-    send(tagMsg.set(buffer));  // Send id of the rfid-tag  to gw
+    send(tagMsg.set(tagid));  // Send id of the rfid-tag  to gw
     
     Serial.print("New tag id: "); Serial.print(tagid); Serial.println("");
 
