@@ -106,18 +106,7 @@ void loop() {
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &key[0], &currentKeyLength);
   
   if (success) {
-#ifdef MY_DEBUG_LOCAL    
-    Serial.print("Found tag id: ");
-    for (uint8_t i=0; i < currentKeyLength; i++) 
-    {
-      if (i>0) Serial.print(key[i], HEX); 
-    }
-    for (uint8_t i=currentKeyLength; i < maxKeyLength; i++) 
-    {
-      Serial.print("00"); 
-    }
-    Serial.println("");
-#endif
+
 
     tagid=(""); //Start with an empty string!
     for (uint8_t i=0; i < currentKeyLength; i++) {
@@ -126,25 +115,17 @@ void loop() {
     for (uint8_t i=currentKeyLength; i < maxKeyLength; i++) {
       tagid+=("00");
     }
-#ifdef MY_DEBUG_LOCAL    
-    Serial.println("Start");
-    Serial.println(tagid);
-    Serial.println("Ende");
-#endif
+    #ifdef MY_DEBUG_LOCAL    
+        Serial.print("ID:"); Serial.println(tagid);
+    #endif
 
     char *cidstr = new char[tagid.length() + 1];
     strcpy(cidstr, tagid.c_str());
-    bool tripped = 1;
-    
-#ifdef MY_DEBUG_LOCAL    
-    Serial.print(F("Buffer: "));
-    Serial.println(cidstr);
-    Serial.println(tripped);
-    Serial.println();
-#endif
-
-    send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
     send(tagMsg.set(cidstr));  // Send id of the rfid-tag  to gw
+
+    bool tripped = 1;
+    send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
+
     //V_IR_RECEIVE  33  This message contains a received IR-command S_IR
     //MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
     //MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
