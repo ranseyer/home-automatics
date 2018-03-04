@@ -87,7 +87,7 @@ void setup() {
 }
 
 void presentation()  {
-  sendSketchInfo("RFID Lock", "0.0.4");
+  sendSketchInfo("RFID Lock", "0.0.5");
   present(CHILD_ID_LOCK, S_LOCK);      delay(RF_INIT_DELAY);
   present(CHILD_ID_WRONG, S_DOOR);   delay(RF_INIT_DELAY);
   present(CHILD_ID_ALARM, S_MOTION);   delay(RF_INIT_DELAY);
@@ -106,8 +106,8 @@ void loop() {
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &key[0], &currentKeyLength);
   
   if (success) {
-
-    Serial.print("Original tag id: ");
+#ifdef MY_DEBUG_LOCAL    
+    Serial.print("Found tag id: ");
     for (uint8_t i=0; i < currentKeyLength; i++) 
     {
       if (i>0) Serial.print(key[i], HEX); 
@@ -117,38 +117,43 @@ void loop() {
       Serial.print("00"); 
     }
     Serial.println("");
-
-
-    tagid=(""); //Start with an empty string!
-    for (uint8_t i=0; i < currentKeyLength; i++)
-    {
-      tagid+=(String(key[i], HEX));
-    }
-    for (uint8_t i=currentKeyLength; i < maxKeyLength; i++)
-    {
-      tagid+=("00");
-    }
-   
-    bool tripped = 1;
-    #ifdef MY_DEBUG_LOCAL
-     Serial.println(tripped);
-    #endif
-
-    send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
-
-    char buffer[24];
-    sprintf(buffer, "%23lX", key);
-    send(tagMsg.set(tagid));  // Send id of the rfid-tag  to gw
-    
-    Serial.print("New tag id: "); Serial.print(tagid); Serial.println("");
-
-
-#ifdef MY_DEBUG_LOCAL
-    Serial.println("");
 #endif
 
+    tagid=(""); //Start with an empty string!
+    for (uint8_t i=0; i < currentKeyLength; i++) {
+      tagid+=(String(key[i], HEX));
+    }
+    for (uint8_t i=currentKeyLength; i < maxKeyLength; i++) {
+      tagid+=("00");
+    }
+#ifdef MY_DEBUG_LOCAL    
+    Serial.println("Start");
+    Serial.println(tagid);
+    Serial.println("Ende");
+#endif
+
+    char *cidstr = new char[tagid.length() + 1];
+    strcpy(cidstr, tagid.c_str());
+    bool tripped = 1;
+    
+#ifdef MY_DEBUG_LOCAL    
+    Serial.print(F("Buffer: "));
+    Serial.println(cidstr);
+    Serial.println(tripped);
+    Serial.println();
+#endif
+
+    send(wrongMsg.set(tripped?"1":"0"));  // Send tripped value to gw
+    send(tagMsg.set(cidstr));  // Send id of the rfid-tag  to gw
+    //V_IR_RECEIVE  33  This message contains a received IR-command S_IR
+    //MyMessage  lockMsg(CHILD_ID_LOCK, V_LOCK_STATUS);
+    //MyMessage  armMsg(CHILD_ID_WRONG, V_ARMED);
+    //MyMessage  wrongMsg(CHILD_ID_ALARM, V_TRIPPED);
+    //MyMessage  tagMsg(CHILD_TAGID, V_TRIPPED);
 
     bool valid = false;
+
+/* Ab hier wäre dann nach dem Muster https://forum.mysensors.org/topic/2223/rfid-2-person-readout/2 umzubauen (einschl. Eingangsarray)*/
     // Compare this key to the valid once registered here in sketch 
     for (int i=0;i<keyCount && !valid;i++) {
       for (int j=0;j<currentKeyLength && !valid;j++) {
@@ -171,13 +176,14 @@ void loop() {
 } 
  
  
- 
 // Unlocks the door.
 void setLockState(bool state, bool doSend){
+#ifdef MY_DEBUG
   if (state) 
      Serial.println("open lock");
   else
      Serial.println("close lock");
+#endif
   if (doSend)
     send(lockMsg.set(state));
   digitalWrite(lockPin, state);
@@ -190,11 +196,11 @@ void receive(const MyMessage &message) {
   if (message.type==V_LOCK_STATUS) {
      // Change relay state
      setLockState(message.getBool(), false); 
-  
+
+#ifdef MY_DEBUG
      // Write some debug info
      Serial.print("Incoming lock status:");
      Serial.println(message.getBool());
+#endif
    } 
 }
-
-
