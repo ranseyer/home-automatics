@@ -72,7 +72,7 @@
 #include <SPI.h>
 #include <MySensors.h>  
 #include <Wire.h>
-#include <PN532_I2C.h>
+#include <_I2C.h>
 #include <PN532.h>
 
 
