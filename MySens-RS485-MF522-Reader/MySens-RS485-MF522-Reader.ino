@@ -110,7 +110,9 @@
 
 MFRC522      mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 MFRC522::Uid olduid;
-MFRC522::Uid masterkey = { 10, {0,0,0,0, 0,0,0,0, 0,0 },  0 };
+MFRC522::Uid masterkey = { 7, {04,15,99,49, FC,02,81},  0 };
+//Card UID: 04 15 99 49 FC 02 81
+
 
 byte       countValidCards  = 0;
 MFRC522::Uid validCards[MAX_CARDS];
