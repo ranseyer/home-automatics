@@ -180,7 +180,7 @@
 <board>
 <plain>
 <hole x="3" y="24" drill="3"/>
-<text x="20.258" y="22.044" size="1.016" layer="26" rot="MR0">CC3530 to CP2102 
+<text x="20.258" y="22.044" size="1.016" layer="26" rot="MR0">CC2530 to CP2102 
 USB V0.1
 (C) www.neuby.de</text>
 <text x="1.197" y="36.006" size="0.8128" layer="26" rot="MR180">GND</text>

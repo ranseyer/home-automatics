@@ -1,0 +1,8 @@
+Die Platine versorgt über einen CP2102 das CC2530_Modul  mit Spannung
+
+Undokumentierte Features:
+-TX vom CP2102 verbinden (Achtung unbedingt vorher die Spannungen des CP2102 Moduls messen, machne geben >4V aus, das zerstört das Zigbee Modul)
+-Flashen über einen optionalen Pinheader, das funktioniert mit etwas Glück auch ohne diese Pins zu verlöten.
+-optional direkt Einspeisung der Spanung über einen *1117 (auch DPAC) oder Bypass des Reglers
+
+Status: Seit einer Weile bestellt, nocht nicht erhalten oder getestet, zumindest ein hässlicher Tippfehler in der Beschriftung.
