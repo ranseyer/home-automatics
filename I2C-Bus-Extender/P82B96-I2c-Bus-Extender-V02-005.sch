@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.0">
+<eagle version="9.1.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -11046,7 +11046,7 @@ Source: http://focus.ti.com/lit/ds/symlink/tlc27l2.pdf</description>
 <wire x1="12.7" y1="73.66" x2="12.7" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$7" class="0">
+<net name="RX-SDA" class="0">
 <segment>
 <pinref part="CABLE" gate="G$1" pin="2"/>
 <wire x1="73.66" y1="68.58" x2="76.2" y2="68.58" width="0.1524" layer="91"/>
@@ -11064,7 +11064,7 @@ Source: http://focus.ti.com/lit/ds/symlink/tlc27l2.pdf</description>
 <junction x="76.2" y="68.58"/>
 </segment>
 </net>
-<net name="N$8" class="0">
+<net name="TY-SCL" class="0">
 <segment>
 <pinref part="CABLE" gate="G$1" pin="3"/>
 <wire x1="109.22" y1="66.04" x2="91.44" y2="66.04" width="0.1524" layer="91"/>
