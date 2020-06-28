@@ -1,0 +1,42 @@
+Partlist
+
+Exported from nanoCUL_v3.4.sch at 13.04.2020 18:44
+
+EAGLE Version 9.5.1 Copyright (c) 1988-2019 Autodesk, Inc.
+
+Assembly variant: 
+
+Part     Value                      Device                     Package                    Library     Sheet
+
+A11A                                PINHD-1X1                  1X01                       pinhead     3
+A11B     SMA                        SMA                        SMA                        wireless    3
+A21                                 PINHD-1X1                  1X01                       pinhead     3
+C31      100u/6V                    CPOL-EUCT3528              CT3528                     rcl         3
+IC21     M25P16-VMN                 EEPROM_SPI_AT25040A        SOIC8                      electronics 3
+IC31     ATSHA204A                  ATSHA204A                  SOT23                      Sensor      3
+LED11    red                        LEDCHIPLED_1206            CHIPLED_1206               led         3
+LED31    red                        LEDCHIPLED_1206            CHIPLED_1206               led         3
+LED32    yellow                     LEDCHIPLED_1206            CHIPLED_1206               led         3
+LED33    green                      LEDCHIPLED_1206            CHIPLED_1206               led         3
+M11      CC1101_MODULE1DIL_BIG      CC1101_MODULE1DIL_BIG      CC1101_MODULE1_DIL-2       wireless    3
+M21      RFM12                      RFM12SMALL                 RFM12_SMALL                wireless    3
+M31      NRF24L01+SMD               NRF24L01+SMD               NRF24L01+SMD               wireless    3
+MCU1     ARDUINO_NANO_NO_A4-A5      ARDUINO_NANO_NO_A4-A5      ARDUINO_NANO_NO_A4-A5      arduino     1
+MCU2     ARDUINO_PRO_MICRO_NO_A0-A1 ARDUINO_PRO_MICRO_NO_A0-A1 ARDUINO_PRO_MICRO_NO_A0-A1 arduino     2
+MCU3     ARDUINO_PRO_MINI_NO_A0-A1  ARDUINO_PRO_MINI_NO_A0-A1  ARDUINO_PRO_MINI_NO_A0-A1  arduino     2
+R11      4k7                        R-EU_R0805                 R0805                      rcl         3
+R12      10k                        R-EU_R0805                 R0805                      rcl         3
+R13      4k7                        R-EU_R0805                 R0805                      rcl         3
+R14      10k                        R-EU_R0805                 R0805                      rcl         3
+R15      4k7                        R-EU_R0805                 R0805                      rcl         3
+R16      10k                        R-EU_R0805                 R0805                      rcl         3
+R17      4k7                        R-EU_R0805                 R0805                      rcl         3
+R18      10k                        R-EU_R0805                 R0805                      rcl         3
+R21      4k7                        R-EU_R0805                 R0805                      rcl         3
+R22      10k                        R-EU_R0805                 R0805                      rcl         3
+R31      4k7                        R-EU_R0805                 R0805                      rcl         3
+R32      4k7                        R-EU_R0805                 R0805                      rcl         3
+R33      4k7                        R-EU_R0805                 R0805                      rcl         3
+SJ1                                 SJ                         SJ                         jumper      1
+SJ2                                 SJ2W                       SJ_2                       jumper      3
+T31      DTSM-3                     DTSM-3                     DTSM-3                     mechanics   3
