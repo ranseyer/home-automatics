@@ -18698,6 +18698,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <text x="174.625" y="92.71" size="1.778" layer="94">D4/02</text>
 <text x="174.625" y="95.25" size="1.778" layer="94">D3/00</text>
 <text x="105.41" y="125.73" size="1.9304" layer="94" rot="R90" align="center">VIN DC</text>
+<text x="192.405" y="60.325" size="1.778" layer="97">Historie:
+V02: Fix +5V at JP4+JP8</text>
 </plain>
 <instances>
 <instance part="NAME" gate="G$1" x="5.08" y="5.08" smashed="yes">
@@ -18879,17 +18881,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="JP7" gate="G$1" pin="1"/>
 </segment>
 </net>
-<net name="5V" class="1">
-<segment>
-<pinref part="JP4" gate="G$1" pin="8"/>
-<label x="168.91" y="87.63" size="1.778" layer="95"/>
-<pinref part="JP8" gate="G$1" pin="8"/>
-<junction x="163.83" y="87.63"/>
-<wire x1="166.37" y1="87.63" x2="173.99" y2="87.63" width="0.1524" layer="91"/>
-<wire x1="163.83" y1="87.63" x2="166.37" y2="87.63" width="0.1524" layer="91"/>
-<junction x="166.37" y="87.63"/>
-</segment>
-</net>
 <net name="D4" class="0">
 <segment>
 <pinref part="JP4" gate="G$1" pin="6"/>
@@ -18936,6 +18927,15 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <junction x="135.255" y="128.905"/>
 <pinref part="C2" gate="G$1" pin="+"/>
 <junction x="145.415" y="128.905"/>
+</segment>
+<segment>
+<pinref part="JP4" gate="G$1" pin="8"/>
+<label x="168.91" y="87.63" size="1.778" layer="95"/>
+<pinref part="JP8" gate="G$1" pin="8"/>
+<junction x="163.83" y="87.63"/>
+<wire x1="166.37" y1="87.63" x2="179.705" y2="74.93" width="0.1524" layer="91"/>
+<wire x1="163.83" y1="87.63" x2="166.37" y2="87.63" width="0.1524" layer="91"/>
+<junction x="166.37" y="87.63"/>
 </segment>
 </net>
 <net name="DQ" class="0">
@@ -19018,6 +19018,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
